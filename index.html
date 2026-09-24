@@ -1,514 +1,609 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>deiacom - ديا كوم | قمة العصرية في خدمات الحاسوب</title>
-    
-    <!-- Font Awesome (Icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Google Font (Poppins & Cairo) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>deiacom - ديا كوم لخدمات الكمبيوتر والطابعات</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts: Cairo + Montserrat for English Logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary-blue: #2448a5;      /* لون شعار deia */
-            --secondary-orange: #f26f21;  /* لون شعار deia */
-            --text-dark: #111827;
-            --text-muted: #6b7280;
-            --glass-bg: rgba(255, 255, 255, 0.4); /* خلفية زجاجية شفافة */
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --gradient-1: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%); /* خلفية متدرجة */
-            --blur: blur(20px); /* كثافة البلور */
-        }
+  <style>
+    :root {
+      --primary-blue: #274ea0;       /* لون deia من الشعار */
+      --secondary-orange: #f26522;   /* لون البرتقالي من الشعار */
+      --text-gray: #6b7280;          /* لون com */
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #eff6ff 100%);
+      --glass-surface: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.7);
+      --blur-val: blur(20px);
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        body {
-            background: var(--gradient-1); /* خلفية ديناميكية */
-            color: var(--text-dark);
-            overflow-x: hidden;
-            position: relative;
-        }
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* دوائر خلفية لتأثير الزجاج */
-        .bg-circle {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-        }
-        .circle-1 {
-            width: 400px; height: 400px;
-            background: rgba(36, 72, 165, 0.2);
-            top: -100px; left: -100px;
-        }
-        .circle-2 {
-            width: 300px; height: 300px;
-            background: rgba(242, 111, 33, 0.15);
-            bottom: -50px; right: 10%;
-        }
+    /* كرات مضيئة ضخمة لتفعيل تأثير الزجاج المصنفر (Glassmorphism) */
+    .blur-sphere {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .sphere-1 {
+      width: 380px;
+      height: 380px;
+      background: rgba(39, 78, 160, 0.22);
+      top: -50px;
+      right: -80px;
+    }
+    .sphere-2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(242, 101, 34, 0.2);
+      top: 40%;
+      left: -90px;
+    }
+    .sphere-3 {
+      width: 350px;
+      height: 350px;
+      background: rgba(39, 78, 160, 0.15);
+      bottom: -60px;
+      right: 15%;
+    }
 
-        /* Glassmorphism Styles */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-        }
+    /* الصناديق الزجاجية */
+    .glass-card {
+      background: var(--glass-surface);
+      backdrop-filter: var(--blur-val);
+      -webkit-backdrop-filter: var(--blur-val);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
 
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-container.glass-nav {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-        .logo-container img {
-            height: 45px;
-            margin-left: 10px;
-        }
-        .logo-container span {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
-        .logo-container span.orange {
-            color: var(--secondary-orange);
-            font-weight: 700;
-        }
+    /* الهيدر وشريط التنقل */
+    header {
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      padding: 0 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary-blue);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        .nav-links a:hover {
-            color: var(--secondary-orange);
-        }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
 
-        .btn-call-nav {
-            background: var(--secondary-orange);
-            color: #fff !important;
-            padding: 10px 22px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(242, 111, 33, 0.3);
-        }
-        .btn-call-nav:hover {
-            background: #d35c15;
-            transform: translateY(-2px);
-        }
+    /* =======================================
+       تصميم الشعار نصياً بالكود (100% دقة)
+    ======================================= */
+    .logo-container {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-decoration: none;
+      direction: ltr; /* لضبط الترتيب الإنجليزي تماماً مثل الشعار */
+      line-height: 1;
+    }
 
-        /* Hero Section */
-        .hero {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-        }
-        .hero-text {
-            flex: 1;
-        }
-        .hero-text h1 {
-            font-size: 3.2rem;
-            color: var(--primary-blue);
-            line-height: 1.2;
-            font-weight: 800;
-            margin-bottom: 25px;
-        }
-        .hero-text h1 span {
-            color: var(--secondary-orange);
-            font-weight: 700;
-        }
-        .hero-text p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 550px;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .btn-main, .btn-whatsapp {
-            padding: 14px 30px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            font-size: 1.05rem;
-        }
-        .btn-main {
-            background: var(--primary-blue);
-            color: #fff;
-        }
-        .btn-main:hover {
-            background: #193375;
-            box-shadow: 0 10px 25px rgba(36, 72, 165, 0.3);
-        }
-        .btn-whatsapp {
-            background: #25D366;
-            color: #fff;
-        }
-        .btn-whatsapp:hover {
-            background: #1eb855;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-        }
+    .logo-top-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+    }
 
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        /* تأثير العنصر ثلاثي الأبعاد */
-        .hero-image .glass-3d-box {
-            width: 320px;
-            height: 320px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .hero-image .glass-3d-box::after {
-            content: "\f109"; /* Laptop icon */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            font-size: 10rem;
-            color: var(--primary-blue);
-            position: absolute;
-            opacity: 0.15;
-            filter: blur(2px);
-            animation: float 5s ease-in-out infinite;
-        }
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            max-width: 400px;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
-            animation: float 4s ease-in-out infinite;
-        }
+    .logo-deia {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--primary-blue);
+      letter-spacing: -1.5px;
+      display: inline-flex;
+      align-items: baseline;
+    }
 
-        /* Services */
-        .section-title {
-            text-align: center;
-            margin: 80px 0 50px;
-        }
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            font-weight: 800;
-        }
-        .section-title h2 span {
-            color: var(--secondary-orange);
-            font-weight: 700;
-        }
+    /* محاكاة حرف الـ i بمربع برتقالي في الأعلى */
+    .custom-i {
+      position: relative;
+      display: inline-block;
+    }
 
-        .services-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+    .custom-i .stem {
+      color: var(--primary-blue);
+    }
 
-        .service-card-glass {
-            padding: 40px;
-            text-align: center;
-        }
-        .service-card-glass:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 45px rgba(31, 38, 135, 0.15);
-        }
-        .service-card-glass .icon-box {
-            width: 80px;
-            height: 80px;
-            background: rgba(36, 72, 165, 0.1);
-            color: var(--primary-blue);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 30px;
-        }
-        .service-card-glass h3 {
-            color: var(--primary-blue);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        .service-card-glass p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
+    .custom-i .square-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--secondary-orange);
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 1px;
+    }
 
-        /* Contact Section */
-        .contact-section {
-            max-width: 1200px;
-            margin: 90px auto 50px;
-            padding: 0 20px;
-        }
-        .info-box-glass {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            padding: 60px;
-        }
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .info-item i {
-            font-size: 2.2rem;
-            color: var(--primary-blue);
-            margin-top: 5px;
-        }
-        .info-item h4 {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .info-item p, .info-item a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .info-item a:hover {
-            color: var(--secondary-orange);
-        }
+    .logo-com {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+      margin-left: 2px;
+    }
 
-        /* Floating WhatsApp */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50px;
-            padding: 14px 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.05);
-            background-color: #1eb855;
-        }
+    .logo-subtext {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--secondary-orange);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            margin-top: 60px;
-            border-top: 1px solid var(--glass-border);
-        }
+    /* زر الاتصال السريع في الهيدر */
+    .btn-header-call {
+      background: linear-gradient(135deg, var(--secondary-orange), #d94b08);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 15px rgba(242, 101, 34, 0.3);
+      transition: transform 0.2s ease;
+    }
 
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+    .btn-header-call:active {
+      transform: scale(0.96);
+    }
 
-        /* Media Queries */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                margin-top: 40px;
-            }
-            .hero-text {
-                margin-bottom: 50px;
-            }
-            .hero-text h1 {
-                font-size: 2.6rem;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-        @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 2.2rem;
-            }
-            .service-card-glass {
-                padding: 30px;
-            }
-            .info-box-glass {
-                padding: 40px;
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    /* القسم الرئيسي */
+    .hero {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      background: rgba(39, 78, 160, 0.1);
+      margin-bottom: 16px;
+      border: 1px solid rgba(39, 78, 160, 0.15);
+    }
+
+    .hero-content h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary-blue);
+      line-height: 1.35;
+      margin-bottom: 16px;
+    }
+
+    .hero-content h1 span {
+      color: var(--secondary-orange);
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 13px 26px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-wa {
+      background: #22c55e;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .btn-tel {
+      background: var(--primary-blue);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(39, 78, 160, 0.3);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+    }
+
+    /* بطاقة العرض التفاعلية (بدون صور مكسورة) */
+    .hero-showcase {
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-icon-box {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(39, 78, 160, 0.15), rgba(242, 101, 34, 0.15));
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      color: var(--primary-blue);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .tags-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--glass-border);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tech-tag i {
+      color: var(--secondary-orange);
+    }
+
+    /* قسم الخدمات */
+    .services-section {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 1.8rem;
+      color: var(--primary-blue);
+      font-weight: 800;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 26px 20px;
+      text-align: center;
+      transition: transform 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .svc-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+      border-radius: 18px;
+      background: rgba(39, 78, 160, 0.1);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .service-card:nth-child(2) .svc-icon {
+      background: rgba(242, 101, 34, 0.1);
+      color: var(--secondary-orange);
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      color: var(--primary-blue);
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* بطاقة الموقع والتواصل المباشر */
+    .location-section {
+      max-width: 1100px;
+      margin: 30px auto 60px;
+      padding: 0 16px;
+    }
+
+    .location-box {
+      padding: 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      align-items: center;
+    }
+
+    .loc-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .loc-card i {
+      font-size: 1.8rem;
+      color: var(--secondary-orange);
+      margin-top: 3px;
+    }
+
+    .loc-card h4 {
+      font-size: 1.15rem;
+      color: var(--primary-blue);
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .loc-card p, .loc-card a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    /* زر واتساب العائم */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #22c55e;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+      z-index: 999;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin-top: 40px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        margin: 50px auto;
+      }
+      .hero-content {
+        text-align: right;
+      }
+      .hero-buttons {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- دوائر الخلفية لتأثير الزجاج -->
-    <div class="bg-circle circle-1"></div>
-    <div class="bg-circle circle-2"></div>
+  <!-- دوائر الخلفية لتأثير البلور والزجاج المصنفر -->
+  <div class="blur-sphere sphere-1"></div>
+  <div class="blur-sphere sphere-2"></div>
+  <div class="blur-sphere sphere-3"></div>
 
-    <!-- شريط التنقل الزجاجي (Glass Nav) -->
-    <header>
-        <div class="nav-container glass-card glass-nav">
-            <a href="#" class="logo-container">
-                <img src="https://i.ibb.co/5Mvj4qP/image-0.png" alt="deiacom Logo"> <!-- تأكد من استضافة الشعار ووضع رابط هنا -->
-            </a>
-            <ul class="nav-links">
-                <li><a href="#services">الخدمات</a></li>
-                <li><a href="#location">موقعنا</a></li>
-            </ul>
-            <a href="tel:777221994" class="btn-call-nav">
-                <i class="fa-solid fa-phone"></i> 777221994
-            </a>
+  <!-- الهيدر -->
+  <header>
+    <div class="navbar glass-card">
+      
+      <!-- الشعار مرسوم نصياً بالكود طبق الأصل -->
+      <a href="#" class="logo-container">
+        <div class="logo-top-row">
+          <span class="logo-deia">
+            de<span class="custom-i"><span class="square-dot"></span><span class="stem">ı</span></span>a
+          </span>
+          <span class="logo-com">com</span>
         </div>
-    </header>
+        <span class="logo-subtext">for computer services</span>
+      </a>
 
-    <!-- القسم الرئيسي العصري (Hero Section) -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>التكنولوجيا الحديثة، <br> لـ <span>حاسوبك وطابعتك</span></h1>
-            <p>مرحباً بكم في <strong>deiacom</strong>. نحن نضع بين أيديكم أحدث ملحقات الكمبيوتر، صيانة الطابعات الاحترافية، وتوفير كافة مستلزمات الطباعة في صنعاء بجودة عالمية وعصرية.</p>
-            <div class="hero-buttons">
-                <a href="https://wa.me/967777221994" target="_blank" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp fa-xl"></i> تواصل عبر واتساب
-                </a>
-                <a href="tel:777221994" class="btn-main">
-                    <i class="fa-solid fa-paper-plane"></i> اتصال مباشر
-                </a>
-            </div>
+      <!-- زر اتصال علوي -->
+      <a href="tel:777221994" class="btn-header-call">
+        <i class="fa-solid fa-phone"></i>
+        <span>777221994</span>
+      </a>
+
+    </div>
+  </header>
+
+  <!-- القسم الرئيسي (Hero) -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-location-dot" style="color: var(--secondary-orange);"></i>
+        <span>صنعاء - جولة الجامعة الجديدة - بداية شارع العدل</span>
+      </div>
+
+      <h1>وجهتك الأولى لخدمات <span>الكمبيوتر والطابعات</span></h1>
+      <p>
+        مرحباً بكم في <strong>deiacom</strong>. نوفر لك أفضل ملحقات الكمبيوتر، صيانة الطابعات، وتعبئة كافة أنواع الأحبار مع توفير قطع الغيار الأصلية بأعلى جودة وسعر منافس.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://wa.me/967777221994?text=السلام%20عليكم%20deiacom" class="btn-action btn-wa" target="_blank">
+          <i class="fa-brands fa-whatsapp fa-xl"></i>
+          <span>راسلنا عبر واتساب</span>
+        </a>
+        <a href="tel:777221994" class="btn-action btn-tel">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>اتصال مباشر</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- بطاقة العرض الزجاجية -->
+    <div class="hero-showcase glass-card">
+      <div class="showcase-icon-box">
+        <i class="fa-solid fa-laptop-medical"></i>
+      </div>
+      <h3 style="color: var(--primary-blue); font-weight: 800; font-size: 1.25rem; margin-bottom: 6px;">خدمة سريعة وضمان موثوق</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">فحص وصيانة مستلزمات المكاتب والشركات والأفراد</p>
+      
+      <div class="tags-container">
+        <span class="tech-tag"><i class="fa-solid fa-check"></i> طابعات وأحبار</span>
+        <span class="tech-tag"><i class="fa-solid fa-check"></i> إكسسوارات كمبيوتر</span>
+        <span class="tech-tag"><i class="fa-solid fa-check"></i> قطع وترقيات SSD</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم الخدمات -->
+  <section class="services-section">
+    <div class="section-title">
+      <h2>أبرز خدماتنا ومنتجاتنا</h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card glass-card">
+        <div class="svc-icon"><i class="fa-solid fa-print"></i></div>
+        <h3>صيانة ومستلزمات الطابعات</h3>
+        <p>تعبئة وتوفير أحبار الليزر والسائلة، رولات سحب الورق، وقطع الصيانة لطابعات HP و Canon و Epson.</p>
+      </div>
+
+      <div class="service-card glass-card">
+        <div class="svc-icon"><i class="fa-solid fa-keyboard"></i></div>
+        <h3>إكسسوارات وملحقات</h3>
+        <p>كيبوردات، ماوسات جيمنج ومكتبية، كابلات شاشات HDMI/VGA، وسماعات أصلية ممتازة.</p>
+      </div>
+
+      <div class="service-card glass-card">
+        <div class="svc-icon"><i class="fa-solid fa-microchip"></i></div>
+        <h3>ترقيات وقطع الغيار</h3>
+        <p>هاردات SSD سريعة، رامات، شواحن لابتوب أصلية، وبطاريات مع الفحص والتأكد من التوافق.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- معلومات الموقع والاتصال -->
+  <section class="location-section">
+    <div class="location-box glass-card">
+      <div class="loc-card">
+        <i class="fa-solid fa-map-pin"></i>
+        <div>
+          <h4>عنوان المحل</h4>
+          <p>صنعاء - جولة الجامعة الجديدة - بداية شارع العدل</p>
         </div>
-        <div class="hero-image">
-            <div class="glass-3d-box glass-card">
-                <!-- هنا يمكنك وضع صورة عصرية شفافة (PNG) للابتوب وطابعة -->
-                <img src="https://cdni.iconscout.com/illustration/premium/thumb/laptop-repairing-service-8610368-6933390.png" alt="deiacom services illustration">
-            </div>
+      </div>
+
+      <div class="loc-card">
+        <i class="fa-solid fa-phone-flip"></i>
+        <div>
+          <h4>التواصل والاستفسار</h4>
+          <p><a href="tel:777221994" dir="ltr">+967 777 221 994</a></p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- قسم الخدمات (Glass Cards) -->
-    <section id="services">
-        <div class="section-title">
-            <h2>أبرز خدماتنا و <span>منتجاتنا</span></h2>
-        </div>
-        <div class="services-grid">
-            <div class="service-card-glass glass-card">
-                <div class="icon-box"><i class="fa-solid fa-print"></i></div>
-                <h3>مستلزمات الطابعات الأحبار</h3>
-                <p>تعبئة أحبار ليزر ومحاليل، رولات صيانة، وقطع غيار لجميع طابعات HP و Canon الأصلية.</p>
-            </div>
+  <!-- زر واتساب العائم -->
+  <a href="https://wa.me/967777221994?text=السلام%20عليكم%20deiacom" class="floating-whatsapp" target="_blank">
+    <i class="fa-brands fa-whatsapp fa-xl"></i>
+    <span>تواصل واتساب</span>
+  </a>
 
-            <div class="service-card-glass glass-card">
-                <div class="icon-box"><i class="fa-solid fa-keyboard"></i></div>
-                <h3>اكسسوارات وملحقات</h3>
-                <p>كيبوردات، ماوسات جيمنج ومكتبي، سماعات احترافية، وكل ما تحتاجه لتجربة مستخدم عصرية.</p>
-            </div>
-
-            <div class="service-card-glass glass-card">
-                <div class="icon-box"><i class="fa-solid fa-memory"></i></div>
-                <h3>قطع غيار وترقيات</h3>
-                <p>هاردات SSD سريعة، رامات، شواحن أصلي، وبطاريات لابتوب لتعزيز أداء جهازك بشكل جذري.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الموقع والاتصال (Glass Container) -->
-    <section class="contact-section" id="location">
-        <div class="info-box-glass glass-card">
-            <div class="info-item">
-                <i class="fa-solid fa-map-location-dot"></i>
-                <div>
-                  <h4>موقع المحل</h4>
-                  <p>صنعاء - جولة الجامعة الجديدة - بداية شارع العدل</p>
-                </div>
-            </div>
-
-            <div class="info-item">
-                <i class="fa-solid fa-mobile-retro"></i>
-                <div>
-                  <h4>الهاتف و واتساب</h4>
-                  <p><a href="tel:777221994" dir="ltr">+967 777 221 994</a></p>
-                </div>
-            </div>
-
-            <div class="info-item">
-                <i class="fa-solid fa-store"></i>
-                <div>
-                  <h4>ساعات العمل</h4>
-                  <p>يومياً، نسعد بخدمتكم في أي وقت</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- زر واتساب العائم العصري -->
-    <a href="https://wa.me/967777221994?text=السلام%20عليكم،%20أرغب%20في%20الاستفسار%20عن%20خدماتكم" class="whatsapp-float" target="_blank">
-        <i class="fa-brands fa-whatsapp fa-xl"></i>
-        <span>استفسر الآن</span>
-    </a>
-
-    <!-- Footer -->
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 - <strong>deiacom for computer services</strong></p>
-    </footer>
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2026 <strong>deiacom</strong> - ديا كوم لخدمات الحاسوب</p>
+  </footer>
 
 </body>
 </html>
